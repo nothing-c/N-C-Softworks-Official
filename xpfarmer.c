@@ -13,9 +13,6 @@
 	 Notes: resets every session
 */
 
-/* TODO: first level works fine, but then lvlcalc doesn't hit and needed xp defaults to 1*/
-
-
 #include <stdio.h>
 #include "lvlup.h"
 
