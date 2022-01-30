@@ -12,7 +12,7 @@
 /*
 N-C SOFTWORKS NC-GET v1.0
 Lightweight version of wget/curl
-Usage: crapget [url]
+Usage: nc-get [url]
 */
 package main;
 
@@ -44,7 +44,7 @@ func main(){
 	if err != nil {
 		fmt.Println(err);
 	} else {
-		//grab only extension - this needs work
+		//grab only extension
 		regex, _ := regexp.Compile("[A-Za-z0-9]*.[A-Za-z]+");
 		//to get the name of the file
 		possible := regex.FindAllStringSubmatch(os.Args[1],-1);
