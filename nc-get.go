@@ -10,7 +10,7 @@
 
 
 /*
-N-C SOFTWORKS NC-GET v1.1
+N-C SOFTWORKS NC-GET v1.2
 Lightweight version of wget/curl
 Usage: nc-get [url]
 */
@@ -19,29 +19,13 @@ package main;
 import(
 	"net/http"
 	"io/ioutil"
-	"regexp"
+	"strings"
 	"fmt"
 	"os"
 	"time"
 )
 
-func checker(name string)(filename string){
-	i := 0;
-	filename = name;
-	for {
-		_, err := ioutil.ReadFile(string(filename));
-		if err != nil{
-			return filename;
-		} else {
-			//concat string and int
-			filename = fmt.Sprint(filename, i);
-		}
-		i++;
-	}
-}
-
 func main(){
-	regex, _ := regexp.Compile("[A-Za-z0-9]*.[A-Za-z]+");
 	client := &http.Client {
 		Timeout: time.Second * 60,
 	}
@@ -58,9 +42,8 @@ func main(){
 			panic("Request blocked, or you don't have internet")
 		}
 		if len(os.Args) < 3 {
-			possible := regex.FindAllStringSubmatch(os.Args[1],-1);
-			filename := possible[len(possible) - 1];
-			realname = checker(filename[0]);
+			tmp := strings.Split(os.Args[1], "/")
+			realname = tmp[(len(tmp) - 1)]
 		} else if len(os.Args) < 4 {
 			realname = os.Args[2]
 		} else {
