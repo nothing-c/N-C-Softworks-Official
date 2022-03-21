@@ -24,7 +24,8 @@ import (
 )
 
 const (
-      TAGFILE = "~/tags.txt"
+      /* THIS NEEDS TO BE AN ABSOLUTE PATH */
+      TAGFILE = "tags.txt"
 )
 
 func findtag(tag string)() {
@@ -53,17 +54,16 @@ func findfile(name string)() {
 }
 
 func addtag(file string)() {
-     /* Working, might wanna add a pwd for concrete path, but w/e */
+     /* Working */
      /* We fail silently, like REAL men! */
+     dir, _ := os.Getwd()
      open,_ := os.Open(file)
      reader := bufio.NewReader(open)
      tags, _ := reader.ReadString('\n')
      list := strings.Split(tags, "#")
-     os.Open(TAGFILE)
-     fileout,_ := os.Open(TAGFILE)
-     write := bufio.NewWriter(fileout)
-     fmt.Fprint(write, (file + ":" + list[1]))
-     write.Flush()
+     fileout,_ := os.OpenFile(TAGFILE, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+     fileout.WriteString(dir + "/" + file + ":" + list[1])
+     fileout.Close()
 }
 
 func main() {
