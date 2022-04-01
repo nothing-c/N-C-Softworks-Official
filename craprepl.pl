@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-#n-c shitty perl REPL
+#n-c crappy perl REPL
 
 #Usage: perl /path/to/craprepl.pl
 our @arr;
