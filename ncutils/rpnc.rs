@@ -54,6 +54,9 @@ fn eval(arr: Vec<&str>, last: f64) -> f64 {
 			"quit" => {
 				std::process::exit(0x0100);
 			}
+			"" => {
+				/* Do nothing, we're just skipping here */
+			}
 			_ => {
 				/* Convert to float and add to stack */
 				stack[point] = a.trim().parse::<f64>().unwrap();
