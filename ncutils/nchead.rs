@@ -21,7 +21,7 @@ use std::io::BufRead;
 
 fn main() -> io::Result<()> {
 	/* Nab args */
-	let args: Vec<String> = env::args().collect();\
+	let args: Vec<String> = env::args().collect();
 	/* Convert string to int (this looks ridiculous) */
 	let numstr = args[1].parse::<i32>().unwrap();
 	let mut count = 0;
