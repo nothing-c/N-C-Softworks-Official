@@ -13,6 +13,8 @@
 N-C SOFTWORKS NC-GET v1.2
 Lightweight version of wget/curl
 Usage: nc-get [url]
+       nc-get [url] [filename]
+       nc-get [url] stdout
 */
 package main;
 
@@ -52,7 +54,12 @@ func main(){
 		}
 		defer resp.Body.Close()
 		pulled, _ := ioutil.ReadAll(resp.Body);
-		ioutil.WriteFile(realname, []byte(pulled), 0666);
+		if realname == "stdout" {
+			/* Send it to stdout */
+			fmt.Println(string(pulled))
+		} else {
+			ioutil.WriteFile(realname, []byte(pulled), 0666);
+		}
 		fmt.Println("Done");
 	}
 }
