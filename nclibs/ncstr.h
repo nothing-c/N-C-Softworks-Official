@@ -14,6 +14,7 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 
 /* Default buffer size (changeable) */
 #define BUF 80
