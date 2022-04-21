@@ -13,6 +13,8 @@
   Contents: ncgets(), ncugets()
 */
 
+#include <stdlib.h>
+
 /* Default buffer size (changeable) */
 #define BUF 80
 
@@ -31,14 +33,17 @@ char * ncgets(int bufsize) {
   //while ((c = getchar()) != EOF) {
   while ((c = getchar()) != '\n') {
     /* As long as we're not approaching the end, keep going */
-    if (i < bufsize) {
+    if (i < bufsize - 1) {
       i++;
       *buf++ = c;
     } else {
+      /* Terminate */
+      *buf++ = '\0';
       /* Safe, will auto-return if it runs out of space */
       return ret;
     }
   }
+  *buf++ = '\0';
   return ret;
 }
 
@@ -74,5 +79,7 @@ char * ncugets() {
       ret = buf;
     }
   }
+  /* Terminate string */
+  *(buf + i) = '\0';
   return ret;
 }
