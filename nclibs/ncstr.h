@@ -13,8 +13,6 @@
   Contents: ncgets(), ncugets()
 */
 
-#include <stdlib.h>
-
 /* Default buffer size (changeable) */
 #define BUF 80
 
