@@ -54,6 +54,10 @@ fn eval(arr: Vec<&str>, last: f64) -> f64 {
 			"quit" => {
 				std::process::exit(0x0100);
 			}
+			"**" => {
+				point -=2;
+				stack[point] = stack[point].powf(stack[point + 1]);
+			}
 			"" => {
 				/* Do nothing, we're just skipping here */
 			}
