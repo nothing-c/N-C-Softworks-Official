@@ -33,7 +33,11 @@ func main(){
 	}
 	realname := ""
 	if len(os.Args) < 2 {
-		fmt.Println("Error: no URL provided")
+		fmt.Println("N-C SOFTWORKS NC-GET v1.2")
+		fmt.Println("Lightweight version of wget/curl")
+	    	fmt.Println("Usage: nc-get [url]")
+	    	fmt.Println("       nc-get [url] [filename]")
+       		fmt.Println("       nc-get [url] stdout")
 		os.Exit(1)
 	} else {
 		req, _ := http.NewRequest("GET", os.Args[1], nil)
