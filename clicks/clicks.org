@@ -1,0 +1,47 @@
+#+TITLE: N-C Clicks Design Doc
+
+* Format of Instructions
+Movement: m x,y
+Click: c x,y [l/r]
+Hold: h x,y [l/r]
+Release: r x,y [l/r]
+Sleep: s [integer seconds],
+Comment: #rest of line here
+
+* Defs
+Usage: clicks [filename]
+
+* TODOs
+** DONE write man page and makefile and post to github
+** DONE get error handling for files (CHECK ERRNO)
+** DONE add a function to sleep?
+** DONE function to get whether the button press is l or r
+** DONE increase the buffer size to 24
+- Have to do this because of numbers greater than 10 issue
+** DONE number handling for numbers greater than 10
+- Bugger, this may be more difficult that I thought
+- Since they can be of arbitrary length, I need to set the buffer length
+  to the max int length in characters
+- Then I need to somehow convert a multi-digit # from chars to int
+- We gonna use powers of ten, with two buffers of 10, and go down the buffer
+  in reverse, calculating the number by adding x \* 10^0, y \* 10^1, etc
+- Doesn't quite work
+- I can literally just rejigger it to use atoi() from stdlib.h
+  but I'd need to malloc() and free() it
+- It's kind of working with atoi(), but only getting the first number
+- The number after keeps at zero because it's going over the buffer
+- The first number in the coord works perfectly, but the second kills itself
+  - This is probably because the second offset for the lines isn't working
+    properly
+** DONE when using test.txt, it thinks there are 4 lines, and doesn't register 
+- When I tell it to print the character, it prints a blank, which means
+  it's prolly a \r\n type issue
+- See debug.txt
+- Looking at the file in a text editor, there's an fffe at the beginning
+  of the file that throws the linecount off
+- So, in a textfile (NOT stdin), there's an extra space char between EVERY character
+- Stdin works just fine tho, so...
+- Nevermind, the file just had weird, non-UTF8 chars in it
+** DONE log all movements and clicks to stdout
+** DONE add handling for fread() not hitting the end of a line
+** DONE rework how things are sucked in from the file

@@ -1,0 +1,27 @@
+.TH CLICKS 7
+.SH NAME
+clicks \- script mouse movement and actions on Win32
+.SH SYNOPSYS
+.B clicks
+.B clicks 
+.IR file ...
+.SH DESCRIPTION
+.B clicks
+moves and clicks the mouse according to a script with the following commands
+.B m x,y
+moves the mouse to the given coordinate
+.B c x,y [l/r]
+clicks the mouse at the given coordinate with the specified button
+.B h x,y [l/r]
+holds the specified mouse button at the given coordinate
+.B r x,y [l/r]
+releases the specified mouse button at the given coordinate
+.B s i
+sleeps for \fB\i\fR seconds, before resuming execution
+.B # ...
+keeps the rest of the line from being executed (comment line)
+.SH OPTIONS
+None, the only argument is a file to read. If this argument is not given, 
+.B clicks
+reads from 
+.B STDIN
