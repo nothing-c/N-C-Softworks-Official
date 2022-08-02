@@ -1,12 +1,15 @@
---speedy haskell interpretation of gnu yes
 import System.Environment
-import Control.Concurrent
+
+-- This reinforces my belief that Haskell is one of the most stupid
+-- programming languages in the world
 
 main :: IO ()
-main = do
+main = do 
 	arg <- getArgs
-	if length arg > 0 then loop (head arg) else loop "y"
+	test arg
 
-loop :: String -> IO ()
-loop x = putStrLn "y" >> loop x
+test arg
+	| arg == [] = loop "y"
+	| otherwise = loop $ head arg
 
+loop x = putStrLn x >> loop x
