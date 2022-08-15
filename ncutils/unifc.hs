@@ -11,12 +11,10 @@ main = do
     args <- getArgs
     if (length args == 0) 
         then do 
-            putStrLn "Usage: unifc file file file..."
-            putStrLn "You can use shell quoting to pass further options"
-            putStrLn "I.e, unifc 'ex.c -o ex'"
+            (putStrLn "Usage: unifc file file file...")
         else do
             compilerFileCont <- readFile compilerFile
-            sequence $ map (\x -> (putStrLn $ "Compiling " ++ (last $ words x)) >> (forkIO (callCommand x))) (map (\x -> getCompiler (lines compilerFileCont) x) args)
+            sequence $ map (\x -> (callCommand x)) (map (\x -> getCompiler (lines compilerFileCont) x) args)
             -- This is to keep the compiler from throwing a fit over IO () vs IO ThreadId
             putStrLn ""
     where
